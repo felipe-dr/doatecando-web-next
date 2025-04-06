@@ -1,4 +1,4 @@
-import { ComponentProps } from 'react';
+import { ComponentProps, JSX } from 'react';
 
 interface MobileMenuButtonComponentProps {
   navigationMenuState: {
@@ -20,7 +20,7 @@ export function MobileMenuButtonComponent(
     >
       {!showNavigationMenu ? (
         <svg
-          className="size-6 transition-colors duration-150 group-hover:text-primary-7"
+          className="size-6 transition-colors duration-150 group-hover:text-primary-3"
           width={26}
           height={18}
           viewBox="0 0 26 18"
@@ -37,7 +37,7 @@ export function MobileMenuButtonComponent(
         </svg>
       ) : (
         <svg
-          className="size-6 transition-colors duration-150 group-hover:text-primary-7"
+          className="size-6 transition-colors duration-150 group-hover:text-primary-3"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

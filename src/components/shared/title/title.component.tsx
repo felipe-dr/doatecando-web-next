@@ -1,12 +1,12 @@
 import { cva } from 'class-variance-authority';
-import { ComponentProps, ElementType } from 'react';
+import { ComponentProps, ElementType, JSX } from 'react';
 
 import { cn } from '@/shared/libs';
 
 const titleVariant = cva('w-full break-words font-semibold uppercase', {
   variants: {
     tag: {
-      h1: 'xs:text-h1-xs sm:max-w-[35rem] md:max-w-[51.25rem] md:text-h1-md lg:text-h1-lg',
+      h1: 'xs:text-h1-xs sm:max-w-[35rem] md:max-w-[52.375rem] md:text-h1-md lg:max-w-[54.875rem] lg:text-h1-lg',
       h2: 'xs:text-h2-xs md:text-h2-md lg:text-h2-lg',
       h3: 'xs:text-h3-xs md:text-h3-md lg:text-h3-lg',
       h4: 'xs:text-h3-xs md:text-h3-md lg:text-h3-lg',
@@ -14,7 +14,7 @@ const titleVariant = cva('w-full break-words font-semibold uppercase', {
       h6: 'xs:text-h3-xs md:text-h3-md lg:text-h3-lg',
     },
     decorator: {
-      true: 'relative ps-4 before:absolute before:left-0 before:h-full before:w-[0.25rem] before:bg-primary-7',
+      true: 'relative ps-4 before:absolute before:left-0 before:h-full before:w-[0.25rem] before:bg-primary-3',
     },
   },
   defaultVariants: {
@@ -43,7 +43,7 @@ export function TitleComponent({
     <Element {...props} className={cn(title, props.className)}>
       {children}
       {hasDotDecorator && (
-        <span className="animate-pulse text-primary-7">.</span>
+        <span className="animate-pulse text-primary-3">.</span>
       )}
     </Element>
   );

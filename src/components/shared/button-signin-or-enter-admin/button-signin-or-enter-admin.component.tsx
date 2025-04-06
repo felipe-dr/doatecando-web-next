@@ -2,12 +2,12 @@
 
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { JSX } from 'react';
 
 import { cn } from '@/shared/libs';
 
 import { buttonVariants } from '../../ui/button';
 import { SigninDialogComponent } from '../signin-dialog/signin-dialog.component';
-import { JSX } from 'react';
 
 export async function ButtonSigninOrEnterAdminComponent(): Promise<JSX.Element> {
   const accesToken = (await cookies()).get('accessToken')?.value;

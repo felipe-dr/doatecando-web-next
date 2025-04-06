@@ -1,5 +1,6 @@
-import { LogoComponent, NavigationMenuComponent } from '@/components';
 import { JSX } from 'react';
+
+import { LogoComponent, NavigationMenuComponent } from '@/components';
 
 interface HeaderComponentProps {
   buttonSigninOrEnterAdminComponent: JSX.Element;

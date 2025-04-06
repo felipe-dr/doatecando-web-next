@@ -9,12 +9,20 @@ import {
 
 export const NAVIGATION_MENU_ITEMS = [
   {
-    label: 'blog',
-    path: '/blog',
+    label: 'sobre',
+    path: '#sobre',
   },
   {
-    label: 'sobre',
-    path: '#',
+    label: 'ranking',
+    path: '#ranking',
+  },
+  {
+    label: 'apoie',
+    path: '#apoie',
+  },
+  {
+    label: 'doe',
+    path: '#doe',
   },
 ];
 
