@@ -1,6 +1,11 @@
 import { Inter } from 'next/font/google';
+import { JSX } from 'react';
+
+import { AuthProvider, ReactQueryProvider } from '@/data/contexts';
 
 import './styles/global.css';
+
+import { ToasterComponent, ToastProvider } from '@/components';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -23,7 +28,12 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-base-16 text-lg text-base-5 antialiased`}
       >
-        {children}
+        <AuthProvider>
+          <ReactQueryProvider>
+            <ToastProvider>{children}</ToastProvider>
+          </ReactQueryProvider>
+        </AuthProvider>
+        <ToasterComponent />
       </body>
     </html>
   );
