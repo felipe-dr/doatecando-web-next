@@ -1,3 +1,6 @@
+export * from './landing-page/about/about.component';
+export * from './landing-page/stats-donations/stats-donations.component';
+export * from './landing-page/support/support.component';
 export * from './shared/alert-dialog-box/alert-dialog-box.component';
 export * from './shared/button-signin-or-enter-admin/button-signin-or-enter-admin.component';
 export * from './shared/data-table/data-table.component';
@@ -9,7 +12,6 @@ export * from './shared/mobile-menu-button/mobile-menu-button.component';
 export * from './shared/navigation-breadcrumb/navigation-breadcrumb.component';
 export * from './shared/navigation-menu-link/navigation-menu-link.component';
 export * from './shared/navigation-menu/navigation-menu.component';
-export * from './shared/search-input/search-input.component';
 export * from './shared/section-box/section-box.component';
 export * from './shared/section-decorator/section-decorator.component';
 export * from './shared/signin-dialog/signin-dialog.component';
