@@ -1,4 +1,7 @@
 export * from './landing-page/about/about.component';
+export * from './landing-page/ecologic/ecologic.component';
+export * from './landing-page/ranking-table/ranking-table.component';
+export * from './landing-page/ranking/ranking.component';
 export * from './landing-page/stats-donations/stats-donations.component';
 export * from './landing-page/support/support.component';
 export * from './shared/alert-dialog-box/alert-dialog-box.component';
