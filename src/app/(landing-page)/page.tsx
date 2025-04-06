@@ -6,7 +6,7 @@ import {
   HeroComponent,
   HeroHeaderComponent,
   RankingComponent,
-  StatsDonationsComponent,
+  DonationsStatsComponent,
   SupportComponent,
   TitleComponent,
 } from '@/components';
@@ -28,7 +28,7 @@ export default function LandingPage(): JSX.Element {
       <main>
         <AboutComponent />
         <RankingComponent />
-        <StatsDonationsComponent />
+        <DonationsStatsComponent />
         <SupportComponent />
         <EcologicComponent />
       </main>
