@@ -1,9 +1,9 @@
 import Link from 'next/link';
+import { JSX } from 'react';
 
 import { cn } from '@/shared/libs';
 
 import { buttonVariants } from '@/components';
-import { JSX } from 'react';
 
 const FOOTER_LINKS = [
   {
@@ -16,7 +16,7 @@ const FOOTER_LINKS = [
   },
 ];
 
-export const FOOTER_RIGHTS = `© ${new Date().getFullYear()} Dinamiques. Alguns direitos reservados.`;
+export const FOOTER_RIGHTS = `© ${new Date().getFullYear()} Doatecando. Alguns direitos reservados.`;
 
 export function FooterComponent(): JSX.Element {
   return (
