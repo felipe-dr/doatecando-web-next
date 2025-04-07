@@ -10,19 +10,19 @@ import {
 export const NAVIGATION_MENU_ITEMS = [
   {
     label: 'sobre',
-    path: '#sobre',
+    path: '/#sobre',
   },
   {
     label: 'ranking',
-    path: '#ranking',
+    path: '/#ranking',
   },
   {
     label: 'apoie',
-    path: '#apoie',
+    path: '/#apoie',
   },
   {
     label: 'doe',
-    path: '#doe',
+    path: '/doacao',
   },
 ];
 
