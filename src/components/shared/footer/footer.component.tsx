@@ -11,8 +11,8 @@ const FOOTER_LINKS = [
     path: '#',
   },
   {
-    label: 'Anuncie',
-    path: '#',
+    label: 'Apoie',
+    path: '/doacao',
   },
 ];
 
