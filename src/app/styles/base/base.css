@@ -25,3 +25,7 @@
   background-color: rgba(var(--primary-4));
   color: rgba(var(--base-white));
 }
+
+html {
+  scroll-behavior: smooth;
+}
