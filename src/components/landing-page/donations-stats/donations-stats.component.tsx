@@ -4,15 +4,18 @@ import {
   UserGroupIcon,
   WifiIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { JSX } from 'react';
 
 import { getDonatedItemsHttp } from '@/http';
 
 import { useCalculateDonationsStats } from '@/data/hooks';
 
+import { cn } from '@/shared/libs';
+
 import { SectionBoxComponent } from '@/components/shared/section-box/section-box.component';
 import { SectionDecoratorComponent } from '@/components/shared/section-decorator/section-decorator.component';
-import { ButtonComponent } from '@/components/ui/button';
+import { buttonVariants } from '@/components/ui/button';
 
 export async function DonationsStatsComponent(): Promise<
   JSX.Element | undefined
@@ -60,12 +63,15 @@ export async function DonationsStatsComponent(): Promise<
             </li>
           </ul>
         </div>
-        <ButtonComponent
-          className="mb-13 justify-self-center lg:mb-14"
-          color="primary"
+        <Link
+          className={cn(
+            buttonVariants({ color: 'primary' }),
+            'mb-13 justify-self-center lg:mb-14',
+          )}
+          href="/doacao"
         >
           Junte-se a causa
-        </ButtonComponent>
+        </Link>
         <SectionDecoratorComponent className="absolute bottom-0 z-[2] fill-base-15" />
       </SectionBoxComponent>
     );

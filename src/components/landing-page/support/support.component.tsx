@@ -2,10 +2,13 @@ import {
   ComputerDesktopIcon,
   WrenchScrewdriverIcon,
 } from '@heroicons/react/24/outline';
+import Link from 'next/link';
 import { JSX } from 'react';
 
+import { cn } from '@/shared/libs';
+
 import {
-  ButtonComponent,
+  buttonVariants,
   SectionBoxComponent,
   TitleComponent,
 } from '@/components/';
@@ -58,9 +61,15 @@ export function SupportComponent(): JSX.Element {
           Então junte-se à equipe e doe suas habilidades para construir a
           educação!
         </p>
-        <ButtonComponent className="mx-auto" color="primary">
+        <Link
+          className={cn(
+            buttonVariants({ color: 'primary' }),
+            'mb-13 justify-self-center lg:mb-14',
+          )}
+          href="/doacao"
+        >
           Oferecer serviço
-        </ButtonComponent>
+        </Link>
       </footer>
     </SectionBoxComponent>
   );

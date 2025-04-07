@@ -1,8 +1,11 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { JSX } from 'react';
 
+import { cn } from '@/shared/libs';
+
 import {
-  ButtonComponent,
+  buttonVariants,
   SectionBoxComponent,
   TitleComponent,
 } from '@/components/';
@@ -49,7 +52,15 @@ export function EcologicComponent(): JSX.Element {
                 futuro da educação, entre em contato e doe equipamentos que
                 podem ser utilizados.
               </p>
-              <ButtonComponent color="primary">Colaborar</ButtonComponent>
+              <Link
+                className={cn(
+                  buttonVariants({ color: 'primary' }),
+                  'mb-13 justify-self-center lg:mb-14',
+                )}
+                href="/doacao"
+              >
+                Colaborar
+              </Link>
             </li>
           </ul>
           <aside className="mx-auto lg:order-first lg:mx-0">
