@@ -31,7 +31,7 @@ export function AboutComponent(): JSX.Element {
           placeholder="blur"
         />
       </div>
-      <div className="max-w-[42.5rem] space-y-9 lg:mt-[4.25rem]">
+      <div className="max-w-[42.5rem] space-y-9 self-start lg:mt-[4.25rem]">
         <p>
           A Doatecando é uma iniciativa que visa promover mais inclusão digital
           e sustentabilidade, pois acredita que a educação aliada com a
