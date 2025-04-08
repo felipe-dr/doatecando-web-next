@@ -3,6 +3,8 @@ export * from './landing-page/donations-stats/donations-stats.component';
 export * from './landing-page/ecologic/ecologic.component';
 export * from './landing-page/ranking-table/ranking-table.component';
 export * from './landing-page/ranking/ranking.component';
+export * from './landing-page/school-map/school-map.component';
+export * from './landing-page/schools/schools.component';
 export * from './landing-page/support/support.component';
 export * from './shared/alert-dialog-box/alert-dialog-box.component';
 export * from './shared/button-signin-or-enter-admin/button-signin-or-enter-admin.component';
