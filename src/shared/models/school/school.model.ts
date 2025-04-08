@@ -1,9 +1,9 @@
-enum UrgencyEnum {
-  ONE,
-  TWO,
-  THREE,
-  FOUR,
-  FIVE,
+export enum UrgencyEnum {
+  ONE = 'Baixa',
+  TWO = 'Moderada',
+  THREE = 'Alta',
+  FOUR = 'Muito alta',
+  FIVE = 'Crítico',
 }
 
 export interface SchoolModel {
@@ -16,7 +16,7 @@ export interface SchoolModel {
   unprivilegedArea: boolean;
   urgency: UrgencyEnum;
   quantityOfStudents: number;
-  availability: Date;
+  availability: string;
   phone: string;
   email: string;
   password: string;
