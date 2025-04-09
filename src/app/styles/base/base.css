@@ -29,3 +29,13 @@
 html {
   scroll-behavior: smooth;
 }
+
+dt {
+  display: flex;
+  flex: 0 1 40%;
+  margin: 0 1.25rem 0.625rem 0;
+}
+
+dd {
+  flex: 0 1 40%;
+}
