@@ -22,23 +22,26 @@ export function useCalculateDonationsStats({
   );
   let benefitedStudents = 0;
   const schoolReusableElectronics = reusableElectronics?.reduce(
-    (acc, donatedItem) => {
+    (totalSchools, donatedItem) => {
       const schoolId = donatedItem.school.id;
-      if (!acc[schoolId]) {
-        acc[schoolId] = {
+
+      if (!totalSchools[schoolId]) {
+        totalSchools[schoolId] = {
           school: donatedItem.school,
           equipmentCount: 0,
         };
       }
-      acc[schoolId].equipmentCount += 1;
 
-      return acc;
+      totalSchools[schoolId].equipmentCount += 1;
+
+      return totalSchools;
     },
     {},
   );
 
   for (const schoolId in schoolReusableElectronics) {
     const { school } = schoolReusableElectronics[schoolId];
+
     if (school?.quantityOfStudents) {
       benefitedStudents += school.quantityOfStudents;
     }
