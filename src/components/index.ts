@@ -13,6 +13,7 @@ export * from './shared/footer/footer.component';
 export * from './shared/header/header.component';
 export * from './shared/hero/hero.component';
 export * from './shared/logo/logo.component';
+export * from './shared/map/map.component';
 export * from './shared/mobile-menu-button/mobile-menu-button.component';
 export * from './shared/navigation-breadcrumb/navigation-breadcrumb.component';
 export * from './shared/navigation-menu-link/navigation-menu-link.component';
