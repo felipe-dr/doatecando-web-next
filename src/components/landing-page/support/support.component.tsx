@@ -3,7 +3,6 @@ import {
   WrenchScrewdriverIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { JSX } from 'react';
 
 import { cn } from '@/shared/libs';
 

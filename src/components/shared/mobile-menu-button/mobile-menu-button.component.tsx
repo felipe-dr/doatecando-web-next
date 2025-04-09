@@ -1,4 +1,4 @@
-import { ComponentProps, JSX } from 'react';
+import { ComponentProps } from 'react';
 
 interface MobileMenuButtonComponentProps {
   navigationMenuState: {

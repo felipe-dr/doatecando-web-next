@@ -1,5 +1,3 @@
-import { JSX } from 'react';
-
 export function SpinnerComponent(): JSX.Element {
   return (
     <div

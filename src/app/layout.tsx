@@ -1,5 +1,4 @@
 import { Inter } from 'next/font/google';
-import { JSX } from 'react';
 
 import { AuthProvider, ReactQueryProvider } from '@/data/contexts';
 

@@ -1,5 +1,3 @@
-import { JSX } from 'react';
-
 import {
   AboutComponent,
   EcologicComponent,

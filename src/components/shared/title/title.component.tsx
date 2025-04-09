@@ -1,5 +1,5 @@
 import { cva } from 'class-variance-authority';
-import { ComponentProps, ElementType, JSX } from 'react';
+import { ComponentProps, ElementType } from 'react';
 
 import { cn } from '@/shared/libs';
 

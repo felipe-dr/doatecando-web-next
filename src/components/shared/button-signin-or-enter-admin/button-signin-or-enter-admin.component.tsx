@@ -2,7 +2,6 @@
 
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { JSX } from 'react';
 
 import { cn } from '@/shared/libs';
 

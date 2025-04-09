@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { JSX } from 'react';
 
 import {
   ButtonSigninOrEnterAdminComponent,

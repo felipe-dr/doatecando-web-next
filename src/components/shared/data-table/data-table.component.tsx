@@ -16,7 +16,7 @@ import {
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table';
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 
 import {
   ButtonComponent,

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { ComponentProps, JSX } from 'react';
+import { ComponentProps } from 'react';
 
 import { cn } from '@/shared/libs';
 

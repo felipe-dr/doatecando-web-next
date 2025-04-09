@@ -1,5 +1,3 @@
-import { JSX } from 'react';
-
 import { LogoComponent, NavigationMenuComponent } from '@/components';
 
 interface HeaderComponentProps {

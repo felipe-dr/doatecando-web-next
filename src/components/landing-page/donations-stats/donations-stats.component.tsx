@@ -5,7 +5,6 @@ import {
   WifiIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { JSX } from 'react';
 
 import { getDonatedItemsHttp } from '@/http';
 
