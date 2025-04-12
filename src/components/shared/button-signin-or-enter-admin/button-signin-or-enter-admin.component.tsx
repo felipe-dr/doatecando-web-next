@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { cn } from '@/shared/libs';
 
 import { buttonVariants } from '../../ui/button';
-import { SigninDialogComponent } from '../signin-dialog/signin-dialog.component';
+import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
 
 export async function ButtonSigninOrEnterAdminComponent(): Promise<JSX.Element> {
   const accesToken = (await cookies()).get('accessToken')?.value;
@@ -19,6 +19,6 @@ export async function ButtonSigninOrEnterAdminComponent(): Promise<JSX.Element> 
       Entrar
     </Link>
   ) : (
-    <SigninDialogComponent />
+    <AuthDialogComponent />
   );
 }
