@@ -44,8 +44,10 @@ export function SchoolMapComponent({
 
   return (
     <>
-      {error && <p>{error}</p>}
-      <LazyMap center={center} places={places} />
+      <div className="h-[25rem]">
+        <LazyMap center={center} places={places} />
+      </div>
+      {error && <p className="font-semibold">{error}</p>}
     </>
   );
 }
