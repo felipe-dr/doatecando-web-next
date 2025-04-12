@@ -26,7 +26,7 @@ export default function MapComponent({
   console.log('places', places);
   return (
     <MapContainer
-      style={{ height: '400px', width: '100%' }}
+      style={{ height: '25rem', width: '100%' }}
       preferCanvas={true}
       center={center}
       zoom={zoom}
