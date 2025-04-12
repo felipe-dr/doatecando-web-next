@@ -14,7 +14,8 @@ export function RankingTableComponent({
   return (
     <DataTableComponent
       columns={rankingTableColumns}
-      data={ranking}
+      data={ranking.slice(3)}
+      pageSize={5}
       showCustomColumns={false}
     />
   );
