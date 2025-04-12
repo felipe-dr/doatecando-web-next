@@ -1,6 +1,7 @@
 export interface RankingModel {
-  position: number;
+  position: string;
   donor: string;
   quantity: number;
-  badge: string;
+  badges: [string];
+  site?: string;
 }
