@@ -36,5 +36,18 @@ export const rankingTableColumns: ColumnDef<RankingTableColumns>[] = [
   {
     accessorKey: 'site',
     header: 'Website',
+    cell: ({ row }) => {
+      const website = row.original.site;
+
+      return (
+        <a
+          href={`https://${website}`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {website}
+        </a>
+      );
+    },
   },
 ];
