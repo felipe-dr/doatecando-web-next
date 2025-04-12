@@ -18,7 +18,7 @@ import { buttonVariants } from '@/components/ui/button';
 export async function DonationsStatsComponent(): Promise<
   JSX.Element | undefined
 > {
-  const donatedItems = await getDonatedItemsHttp();
+  const donatedItems = await getDonatedItemsHttp({ limit: 1000 });
 
   const { benefitedStudents, reusableElectronics, totalSupporters } =
     useCalculateDonationsStats({ donatedItems: donatedItems || [] });
