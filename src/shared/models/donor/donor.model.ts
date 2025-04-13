@@ -1,4 +1,4 @@
-export enum BadgesType {
+export enum BadgesEnum {
   FIRST_DONATION = '🥇 Primeira doação',
   TECH_SAVIOR = '🔥 Salvador da tecnologia',
   ECO_HERO = '🌍 Herói ecológico',
