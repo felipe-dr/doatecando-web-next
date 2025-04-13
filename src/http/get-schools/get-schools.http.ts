@@ -9,7 +9,7 @@ type GetSchoolsHttpRequest = {
 
 type GetSchoolsHttpResponse = SchoolModel[];
 
-export async function getSchools({
+export async function getSchoolsHttp({
   page = 1,
   limit = 10,
 }: GetSchoolsHttpRequest = {}): Promise<GetSchoolsHttpResponse> {
