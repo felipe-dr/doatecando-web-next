@@ -1,4 +1,4 @@
-import { DonatedItemModel, DonatedServicesType } from '@/shared/models';
+import { DonatedItemModel, DonatedResourcesEnum } from '@/shared/models';
 
 interface CalculateDonationsStatsProps {
   donatedItems: DonatedItemModel[];
@@ -10,6 +10,10 @@ interface CalculateDonationsStatsReturn {
   reusableElectronics: DonatedItemModel[];
 }
 
+const getEnumKeyByValue = (enumObj: any, value: string) => {
+  return Object.keys(enumObj).find((key) => enumObj[key] === value);
+};
+
 export function useCalculateDonationsStats({
   donatedItems,
 }: CalculateDonationsStatsProps): CalculateDonationsStatsReturn {
@@ -17,8 +21,15 @@ export function useCalculateDonationsStats({
   const reusableElectronics = donatedItems?.filter(
     (donatedItem) =>
       donatedItem.item !==
-      (DonatedServicesType.SUPORTSERVICES ||
-        DonatedServicesType.RECYCLESERVICES),
+        getEnumKeyByValue(
+          DonatedResourcesEnum,
+          DonatedResourcesEnum.SUPORTSERVICES,
+        ) &&
+      donatedItem.item !==
+        getEnumKeyByValue(
+          DonatedResourcesEnum,
+          DonatedResourcesEnum.RECYCLESERVICES,
+        ),
   );
   let benefitedStudents = 0;
   const schoolReusableElectronics = reusableElectronics?.reduce(
