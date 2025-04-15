@@ -12,6 +12,8 @@ export interface SchoolModel {
   street: string;
   number: string;
   postalCode: string;
+  latitude?: string;
+  longitude?: string;
   neighbourhood: string;
   unprivilegedArea: boolean;
   urgency: UrgencyEnum;
