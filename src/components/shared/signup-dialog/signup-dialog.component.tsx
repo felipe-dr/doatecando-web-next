@@ -11,6 +11,8 @@ import { signupHttp } from '@/http';
 
 import { useToast } from '@/data/hooks';
 
+import { UrgencyEnum } from '@/shared/models';
+
 import {
   ButtonComponent,
   DialogFooterComponent,
@@ -30,7 +32,6 @@ import {
   SwitchComponent,
 } from '@/components';
 
-import { UrgencyEnum } from '@/shared/models';
 import { signupDialogSchema } from './signup-dialog.schema';
 
 const urgencyLevels = Object.entries(UrgencyEnum).map(([value, label]) => ({
@@ -108,7 +109,7 @@ export function SignupDialogComponent(): JSX.Element {
     <>
       <FormComponent {...signupDialogForm}>
         <form noValidate onSubmit={signupDialogForm.handleSubmit(handleSubmit)}>
-          <div className="space-y-8 overflow-y-scroll max-h-[600px]">
+          <div className="max-h-[600px] space-y-8 overflow-y-scroll">
             <FormFieldComponent
               control={signupDialogForm.control}
               name="name"
@@ -194,7 +195,7 @@ export function SignupDialogComponent(): JSX.Element {
               control={signupDialogForm.control}
               name="unprivilegedArea"
               render={({ field }) => (
-                <FormItemComponent className="px-1 flex items-center gap-2">
+                <FormItemComponent className="flex items-center gap-2 px-1">
                   <FormLabelComponent>Área carente?</FormLabelComponent>
                   <FormControlComponent>
                     <SwitchComponent
