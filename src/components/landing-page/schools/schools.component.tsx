@@ -3,10 +3,19 @@
 import { MagnifyingGlassIcon, MapPinIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
 
-import { useFilteredSchools } from '@/data/hooks';
+import {
+  useFilteredSchools,
+  usePostalCodeInformations,
+  useToast,
+} from '@/data/hooks';
 
-import { SchoolModel, UrgencyEnum } from '@/shared/models';
+import {
+  PostalCodeInformationsModel,
+  SchoolModel,
+  UrgencyEnum,
+} from '@/shared/models';
 
+import { SpinnerComponent } from '@/components/shared/spinner/spinner.component';
 import { TitleComponent } from '@/components/shared/title/title.component';
 import { ButtonComponent } from '@/components/ui/button';
 import {
@@ -44,11 +53,60 @@ export function SchoolsComponent({
   schools,
 }: SchoolsComponentProps): JSX.Element {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const { filteredSchools } = useFilteredSchools({ schools, searchQuery });
-  const [schoolNameSelected, setSchoolNameSelected] = useState<string>('');
+  const { filteredSchools } = useFilteredSchools({
+    schools,
+    searchQuery,
+  });
+  const [selectedSchool, setSelectedSchool] = useState<SchoolModel | null>(
+    null,
+  );
+  const [coordinates, setCoordinates] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+  const {
+    handlePostalCodeSearch,
+    loadingPostalCodeSearch,
+    setLoadingPostalCodeSearch,
+    errorPostalCodeSearch,
+  } = usePostalCodeInformations();
+  const { toast } = useToast();
 
-  const showSchoolMap = (schoolName: string) => {
-    setSchoolNameSelected(schoolName);
+  const showSchoolMap = async (school: SchoolModel) => {
+    const hasSchoolMapCoordinates = school.latitude && school.longitude;
+
+    setLoadingPostalCodeSearch(true);
+
+    if (hasSchoolMapCoordinates) {
+      setCoordinates({
+        latitude: Number(school.latitude),
+        longitude: Number(school.longitude),
+      });
+      setLoadingPostalCodeSearch(false);
+    } else {
+      const getSchoolMapCoordinates: PostalCodeInformationsModel | undefined =
+        await handlePostalCodeSearch(school.postalCode);
+      const hasSchoolMapLocation = getSchoolMapCoordinates?.location;
+
+      if (hasSchoolMapLocation) {
+        const { latitude, longitude } =
+          getSchoolMapCoordinates.location.coordinates;
+
+        setCoordinates({
+          latitude: Number(latitude),
+          longitude: Number(longitude),
+        });
+      } else {
+        toast({
+          title: 'Erro!',
+          description: errorPostalCodeSearch,
+          variant: 'destructive',
+        });
+        setCoordinates(null);
+      }
+    }
+
+    setSelectedSchool(school);
   };
 
   return (
@@ -73,22 +131,38 @@ export function SchoolsComponent({
               <DialogTriggerComponent asChild>
                 <ButtonComponent
                   className="absolute right-0 top-0 text-primary-2"
-                  onClick={() => showSchoolMap(school.name)}
+                  onClick={() => showSchoolMap(school)}
                 >
                   <MapPinIcon className="text-primary-3" />
                   Abrir mapa
                 </ButtonComponent>
               </DialogTriggerComponent>
-              <DialogContentComponent className="sm:max-w-screen-sm">
-                <DialogHeaderComponent>
-                  <DialogTitleComponent asChild>
-                    <TitleComponent tag="h3" hasDotDecorator={false}>
-                      {schoolNameSelected}
-                    </TitleComponent>
-                  </DialogTitleComponent>
-                </DialogHeaderComponent>
-                <SchoolMapComponent schoolPostalCode={school.postalCode} />
-              </DialogContentComponent>
+              {selectedSchool &&
+                selectedSchool.id === school.id &&
+                !loadingPostalCodeSearch &&
+                coordinates && (
+                  <DialogContentComponent className="sm:max-w-screen-sm">
+                    <DialogHeaderComponent>
+                      <DialogTitleComponent asChild>
+                        <TitleComponent tag="h3" hasDotDecorator={false}>
+                          {selectedSchool?.name}
+                        </TitleComponent>
+                      </DialogTitleComponent>
+                    </DialogHeaderComponent>
+                    <SchoolMapComponent
+                      postalCodeInformations={{
+                        id: school.id,
+                        name: school.name,
+                        location: coordinates,
+                      }}
+                    />
+                  </DialogContentComponent>
+                )}
+              {loadingPostalCodeSearch && (
+                <div className="fixed inset-0 z-[100] flex h-screen w-full items-center justify-center bg-base-black/40">
+                  <SpinnerComponent />
+                </div>
+              )}
             </DialogComponent>
             <dl className="my-9 rounded-md border border-base-12 bg-base-15 p-6 pt-7 shadow-md md:flex md:flex-wrap">
               <dt className="font-semibold uppercase text-base-white md:mb-5">
