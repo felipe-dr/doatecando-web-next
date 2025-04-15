@@ -9,47 +9,41 @@ import 'leaflet-defaulticon-compatibility';
 import { LatLngExpression } from 'leaflet';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet';
 
-import { PlacesModel } from '@/shared/models';
+import { PlaceModel } from '@/shared/models';
 
 interface MapComponentProps {
   center: LatLngExpression;
   zoom?: number;
-  places: PlacesModel[];
+  place: PlaceModel;
 }
 
 export default function MapComponent({
   center,
   zoom = 11,
-  places,
+  place,
 }: MapComponentProps): JSX.Element {
-  console.log('center', center);
-  console.log('places', places);
+  const { latitude, longitude } = place.location;
+
   return (
     <MapContainer
       style={{ height: '25rem', width: '100%' }}
       preferCanvas={true}
       center={center}
       zoom={zoom}
-      minZoom={3}
       scrollWheelZoom={true}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {places.map((place) => {
-        const { latitude, longitude } = place.location;
 
-        return (
-          <Marker
-            key={place.id}
-            title={place.name}
-            position={[latitude, longitude]}
-          >
-            <Popup>{place.name}</Popup>
-          </Marker>
-        );
-      })}
+      <Marker
+        key={place.id}
+        title={place.name}
+        position={[latitude, longitude]}
+      >
+        <Popup>{place.name}</Popup>
+      </Marker>
     </MapContainer>
   );
 }
