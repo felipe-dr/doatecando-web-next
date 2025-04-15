@@ -1,4 +1,4 @@
-export interface PlacesModel {
+export interface PlaceModel {
   id: string;
   name: string;
   location: {
