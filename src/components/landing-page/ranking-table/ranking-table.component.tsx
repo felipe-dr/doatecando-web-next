@@ -1,6 +1,6 @@
-import { DataTableComponent } from '@/components';
-
 import { RankingModel } from '@/shared/models';
+
+import { DataTableComponent } from '@/components';
 
 import { rankingTableColumns } from './ranking-table-columns.component';
 

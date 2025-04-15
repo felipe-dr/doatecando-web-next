@@ -28,7 +28,7 @@ export function AuthDialogComponent(): JSX.Element {
         </DialogTriggerComponent>
         <DialogContentComponent className="sm:max-w-screen-sm">
           <TabsComponent defaultValue="auth">
-            <TabsListComponent className="flex-wrap w-full mt-7 mb-5">
+            <TabsListComponent className="mb-5 mt-7 w-full flex-wrap">
               <TabsTriggerComponent className="w-full flex-1" value="auth">
                 Autenticar
               </TabsTriggerComponent>

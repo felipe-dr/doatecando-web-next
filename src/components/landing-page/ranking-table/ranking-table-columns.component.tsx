@@ -1,7 +1,8 @@
 'use client';
 
-import { BadgesType } from '@/shared/models';
 import { ColumnDef } from '@tanstack/react-table';
+
+import { BadgesEnum } from '@/shared/models';
 
 export type RankingTableColumns = {
   position: string;
@@ -30,7 +31,7 @@ export const rankingTableColumns: ColumnDef<RankingTableColumns>[] = [
     cell: ({ row }) => {
       const badges = row.original.badges;
 
-      return <>{badges.map((badge) => BadgesType[badge]).join(', ')}</>;
+      return <>{badges.map((badge) => BadgesEnum[badge]).join(', ')}</>;
     },
   },
   {
