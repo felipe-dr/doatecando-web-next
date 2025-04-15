@@ -9,7 +9,7 @@ import { buttonVariants } from '../../ui/button';
 import { AuthDialogComponent } from '../auth-dialog/auth-dialog.component';
 
 export async function ButtonSigninOrEnterAdminComponent(): Promise<JSX.Element> {
-  const accesToken = (await cookies()).get('accessToken')?.value;
+  const accesToken = cookies().get('accessToken')?.value;
 
   return accesToken ? (
     <Link
