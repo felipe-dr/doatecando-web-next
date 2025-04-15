@@ -10,7 +10,7 @@ interface CalculateDonationsStatsReturn {
   reusableElectronics: DonatedItemModel[];
 }
 
-const getEnumKeyByValue = (enumObj: any, value: string) => {
+const getEnumKeyByValue = (enumObj, value: string) => {
   return Object.keys(enumObj).find((key) => enumObj[key] === value);
 };
 
