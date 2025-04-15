@@ -1,51 +1,54 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 'use client';
 
-import { PostalCodeInformationsModel } from '@/shared/models';
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
-interface PostalCodeInformationsStatsProps {
-  schoolPostalCode: string;
-}
+import { PostalCodeInformationsModel } from '@/shared/models';
 
 interface PostalCodeInformationsStatsReturn {
-  postalCodeInformations: PostalCodeInformationsModel | null;
-  error: string;
+  handlePostalCodeSearch: (
+    schoolPostalCode: string,
+  ) => Promise<PostalCodeInformationsModel | undefined>;
+  loadingPostalCodeSearch: boolean;
+  setLoadingPostalCodeSearch: Dispatch<SetStateAction<boolean>>;
+  errorPostalCodeSearch: string;
 }
 
-export function usePostalCodeInformations({
-  schoolPostalCode,
-}: PostalCodeInformationsStatsProps): PostalCodeInformationsStatsReturn {
-  const [error, setError] = useState<string>('');
-  const [postalCodeInformations, setPostalCodeInformations] =
-    useState<PostalCodeInformationsModel | null>(null);
+export function usePostalCodeInformations(): PostalCodeInformationsStatsReturn {
+  const [loadingPostalCodeSearch, setLoadingPostalCodeSearch] =
+    useState<boolean>(false);
+  const [errorPostalCodeSearch, setErrorPostalCodeSearch] =
+    useState<string>('');
 
-  const handleSearchPostalCode = async () => {
+  const handlePostalCodeSearch = async (
+    schoolPostalCode: string,
+  ): Promise<PostalCodeInformationsModel | undefined> => {
+    setLoadingPostalCodeSearch(true);
+
     try {
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_CEP_API}/${schoolPostalCode}`,
       );
       const data = await response.json();
-      console.log(data);
 
       if (data.errors) {
-        setError('CEP não encontrado.');
-        console.log(data);
-        console.log(data.error);
-        return null;
+        setErrorPostalCodeSearch('CEP não encontrado.');
       }
 
-      setPostalCodeInformations(data as PostalCodeInformationsModel);
-    } catch (error: unknown) {
-      setError('Serviço indisponível. Por favor, tente novamente mais tarde.');
+      return (data as PostalCodeInformationsModel) || null;
+    } catch (serverError: unknown) {
+      setErrorPostalCodeSearch(
+        'Serviço indisponível. Por favor, tente novamente mais tarde.',
+      );
+    } finally {
+      setLoadingPostalCodeSearch(false);
     }
   };
 
-  useEffect(() => {
-    handleSearchPostalCode();
-  }, []);
-
   return {
-    postalCodeInformations,
-    error,
+    handlePostalCodeSearch,
+    loadingPostalCodeSearch,
+    setLoadingPostalCodeSearch,
+    errorPostalCodeSearch,
   };
 }
