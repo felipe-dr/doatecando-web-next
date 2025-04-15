@@ -1,15 +1,18 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { GlobeAltIcon } from '@heroicons/react/24/outline';
+
+import { getDonatedItemsHttp } from '@/http';
+
+import { useDonorRanking } from '@/data/hooks';
+
+import { BadgesEnum, RankingModel } from '@/shared/models';
+
 import {
   BadgeIcon,
   RankingTableComponent,
   SectionBoxComponent,
   TitleComponent,
 } from '@/components/';
-import { useDonorRanking } from '@/data/hooks';
-
-import { getDonatedItemsHttp } from '@/http';
-
-import { BadgesType, RankingModel } from '@/shared/models';
-import { GlobeAltIcon } from '@heroicons/react/24/outline';
 
 function setRankingPosition(position: number): string | undefined {
   switch (position + 1) {
@@ -23,7 +26,7 @@ function setRankingPosition(position: number): string | undefined {
 }
 
 export async function RankingComponent(): Promise<JSX.Element | undefined> {
-  const donatedItems = await getDonatedItemsHttp({ limit: 100 });
+  const donatedItems = await getDonatedItemsHttp({ limit: 1000 });
 
   if (donatedItems) {
     const { donorsRanking } = useDonorRanking({ donatedItems });
@@ -58,12 +61,20 @@ export async function RankingComponent(): Promise<JSX.Element | undefined> {
               Ranking de doadores
             </TitleComponent>
           </header>
-          <ul className="mb-2 items-center flex flex-col gap-9 md:flex-row md:justify-center">
+          <ul
+            className="mb-2 flex flex-col items-center gap-9 md:flex-row md:justify-center"
+            itemScope
+            itemType="https://schema.org/ItemList"
+          >
             {donorsRanking.slice(0, 3).map((donorRanking, index) => (
               <li
-                className={`w-full relative flex max-w-[21.25rem] flex-col items-center rounded-md border border-primary-1 bg-primary-4 text-center ${index === 0 && 'bg-primary-8 border-primary-3'} ${index === 1 && 'md:-order-1'} ${index === 2 && '!bg-primary-1 !border-primary-7'}`}
+                className={`relative flex w-full max-w-[21.25rem] flex-col items-center rounded-md border border-primary-1 bg-primary-4 text-center ${index === 0 && 'border-primary-3 bg-primary-8'} ${index === 1 && 'md:-order-1'} ${index === 2 && '!border-primary-7 !bg-primary-1'}`}
                 key={donorRanking.id}
+                itemProp="itemListElement"
+                itemScope
+                itemType="https://schema.org/Person"
               >
+                <meta itemProp="position" content={setRankingPosition(index)} />
                 <span className="self-start ps-[0.75rem] text-h2-md text-base-white">
                   {setRankingPosition(index)}
                 </span>
@@ -72,12 +83,13 @@ export async function RankingComponent(): Promise<JSX.Element | undefined> {
                     href={`https://${donorRanking.site}`}
                     target="_blank"
                     rel="noopener noreferrer"
+                    itemProp="url"
                   >
-                    <GlobeAltIcon className="absolute top-2 right-2 size-4 mx-auto text-base-2" />
+                    <GlobeAltIcon className="absolute right-2 top-2 mx-auto size-4 text-base-2" />
                   </a>
                 )}
                 <BadgeIcon className="absolute left-1/2 top-[-1.5rem] h-[4.938rem] -translate-x-1/2" />
-                <header className="flex-grow-[2] mb-8 mt-2 px-6 font-semibold uppercase">
+                <header className="mb-8 mt-2 grow-[2] px-6 font-semibold uppercase">
                   <address
                     className={`text-h3-md not-italic text-base-white ${index === 0 && 'text-primary-1'} ${index === 2 && 'text-primary-7'}`}
                   >
@@ -86,6 +98,7 @@ export async function RankingComponent(): Promise<JSX.Element | undefined> {
                         href={`https://${donorRanking.site}`}
                         target="_blank"
                         rel="noopener noreferrer"
+                        itemProp="name"
                       >
                         {donorRanking.name}
                       </a>
@@ -93,17 +106,28 @@ export async function RankingComponent(): Promise<JSX.Element | undefined> {
                       donorRanking.site
                     )}
                   </address>
-                  <ul className="flex justify-center gap-1 mt-2">
+                  <ul className="mt-2 flex justify-center gap-1">
                     {donorRanking.badges?.map((badge) => (
                       <li className="text-sm" key={badge}>
-                        {Array.from(BadgesType[badge])[0] as string}
+                        {Array.from(BadgesEnum[badge])[0] as string}
                       </li>
                     ))}
                   </ul>
                 </header>
                 <footer
                   className={`px-6 pb-6 text-md text-base-3 ${index === 2 && 'text-primary-8'}`}
+                  itemProp="interactionStatistic"
+                  itemScope
+                  itemType="https://schema.org/InteractionCounter"
                 >
+                  <meta
+                    itemProp="interactionType"
+                    content="https://schema.org/DonateAction"
+                  />
+                  <meta
+                    itemProp="userInteractionCount"
+                    content={String(donorRanking.totalItemsDonated)}
+                  />
                   <var className="not-italic">
                     {donorRanking.totalItemsDonated}
                   </var>{' '}

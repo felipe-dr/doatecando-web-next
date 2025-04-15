@@ -11,6 +11,8 @@ export function AboutComponent(): JSX.Element {
       id="sobre"
       className="gap-9 lg:flex-row lg:pt-0"
       tag="section"
+      itemScope
+      itemType="https://schema.org/Organization"
     >
       <div className="relative z-[2] order-last before:absolute before:left-0 before:h-[12.5rem] before:w-full before:rounded-md before:bg-primary-3 lg:order-first lg:ml-[3rem] lg:mt-[-7.5rem] lg:flex lg:before:ml-[-0.75rem] lg:before:mt-[3.375rem]">
         <Image
@@ -31,7 +33,7 @@ export function AboutComponent(): JSX.Element {
         />
       </div>
       <div className="max-w-[42.5rem] space-y-9 self-start lg:mt-[4.25rem]">
-        <p>
+        <p itemProp="description">
           A Doatecando é uma iniciativa que visa promover mais inclusão digital
           e sustentabilidade, pois acredita que a educação aliada com a
           tecnologia podem transformar vidas e construir novas soluções.
