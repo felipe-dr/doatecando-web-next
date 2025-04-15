@@ -1,4 +1,4 @@
-import { getSchools } from '@/http';
+import { getSchoolsHttp } from '@/http';
 
 import {
   HeroComponent,
@@ -9,7 +9,7 @@ import {
 } from '@/components';
 
 export default async function DonationPage(): Promise<JSX.Element | undefined> {
-  const schools = await getSchools();
+  const schools = await getSchoolsHttp();
 
   return (
     <>
