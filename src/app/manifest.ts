@@ -3,7 +3,7 @@ import { MetadataRoute } from 'next';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Doatecando - Doação que Educa, Atitude que Preserva',
-    short_name: 'Dinamiques',
+    short_name: 'Doatecando',
     description:
       'A Doatecando é uma iniciativa que visa promover mais inclusão digital e sustentabilidade, pois acredita que a educação aliada com a tecnologia podem transformar vidas e construir novas soluções.',
     start_url: '/',
