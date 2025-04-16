@@ -40,7 +40,7 @@ function changeColorByUrgencyLevel(urgency: string) {
     case 'FOUR':
       return '#BA1B1B';
     case 'FIVE':
-      return '#9A0C0C';
+      return '#690404';
     default:
   }
 }
@@ -53,7 +53,7 @@ export function SchoolsComponent({
   schools,
 }: SchoolsComponentProps): JSX.Element {
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const { filteredSchools } = useFilteredSchools({
+  const { filteredSchoolsByUrgencyAndSearch } = useFilteredSchools({
     schools,
     searchQuery,
   });
@@ -124,8 +124,8 @@ export function SchoolsComponent({
           <MagnifyingGlassIcon className="absolute right-4 top-1/2 size-[1.042rem] -translate-y-1/2 text-primary-3 lg:right-5 lg:size-[1.34rem]" />
         </>
       </form>
-      {filteredSchools.length ? (
-        filteredSchools?.map((school: SchoolModel) => (
+      {filteredSchoolsByUrgencyAndSearch.length ? (
+        filteredSchoolsByUrgencyAndSearch?.map((school: SchoolModel) => (
           <div className="relative" key={school.id}>
             <DialogComponent>
               <DialogTriggerComponent asChild>
@@ -215,6 +215,14 @@ export function SchoolsComponent({
                 CEP
               </dt>
               <dd className="mb-4">{school.postalCode}</dd>
+              <dt className="font-semibold uppercase text-base-white md:mb-5">
+                Latitude
+              </dt>
+              <dd className="mb-4">{school.latitude}</dd>
+              <dt className="font-semibold uppercase text-base-white md:mb-5">
+                Longitude
+              </dt>
+              <dd className="mb-4">{school.longitude}</dd>
               <dt className="font-semibold uppercase text-base-white md:mb-5">
                 Bairro
               </dt>
