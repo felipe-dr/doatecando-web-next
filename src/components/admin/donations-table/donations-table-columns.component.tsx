@@ -3,7 +3,7 @@
 import { ArrowsUpDownIcon } from '@heroicons/react/24/outline';
 import { ColumnDef } from '@tanstack/react-table';
 
-import { BadgesEnum } from '@/shared/models';
+import { BadgesEnum, DonatedResourcesEnum } from '@/shared/models';
 
 import { ButtonComponent } from '@/components';
 
@@ -49,6 +49,11 @@ export const donationsTableColumns: ColumnDef<DonationsTableColumns>[] = [
           <ArrowsUpDownIcon className="ml-2 size-4" />
         </ButtonComponent>
       );
+    },
+    cell: ({ row }) => {
+      const items = row.original.item;
+
+      return <>{DonatedResourcesEnum[items]}</>;
     },
   },
   {
