@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -15,6 +15,7 @@ import { UrgencyEnum } from '@/shared/models';
 
 import {
   ButtonComponent,
+  CheckboxComponent,
   DialogFooterComponent,
   FormComponent,
   FormControlComponent,
@@ -23,6 +24,7 @@ import {
   FormLabelComponent,
   FormMessageComponent,
   InputComponent,
+  MaskedInputComponent,
   SelectComponent,
   SelectContentComponent,
   SelectItemComponent,
@@ -39,6 +41,8 @@ const urgencyLevels = Object.entries(UrgencyEnum).map(([value, label]) => ({
   label,
 }));
 
+const daysOfWeek = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+
 export function SignupDialogComponent(): JSX.Element {
   const signupDialogForm = useForm<z.infer<typeof signupDialogSchema>>({
     resolver: zodResolver(signupDialogSchema),
@@ -47,6 +51,8 @@ export function SignupDialogComponent(): JSX.Element {
       street: '',
       number: '',
       postalCode: '',
+      latitude: 0,
+      longitude: 0,
       neighbourhood: '',
       unprivilegedArea: false,
       urgency: '',
@@ -59,11 +65,75 @@ export function SignupDialogComponent(): JSX.Element {
   });
   const router = useRouter();
   const { toast } = useToast();
+  const [startTime, setStartTime] = useState<string>('00:00');
+  const [endTime, setEndTime] = useState<string>('00:00');
+
+  const handleDayChange = (day: string, isChecked: boolean) => {
+    const currentAvailability = signupDialogForm
+      .getValues('availability')
+      .split('-');
+
+    let updatedAvailability: string[];
+
+    if (isChecked) {
+      if (!currentAvailability.includes(day)) {
+        updatedAvailability = [...currentAvailability, day];
+      } else {
+        updatedAvailability = [...currentAvailability];
+      }
+    } else {
+      updatedAvailability = currentAvailability.filter((d) => d !== day);
+    }
+
+    const sortedAvailability = updatedAvailability.sort((a, b) => {
+      const order = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sab'];
+      return order.indexOf(a) - order.indexOf(b);
+    });
+
+    signupDialogForm.setValue('availability', sortedAvailability.join('-'));
+
+    const formattedAvailability = signupDialogForm.getValues('availability');
+
+    if (formattedAvailability.startsWith('-')) {
+      signupDialogForm.setValue('availability', formattedAvailability.slice(1));
+    }
+  };
+
+  const handleStartTimeChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setStartTime(event.target.value);
+  };
+
+  const handleEndTimeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEndTime(event.target.value);
+  };
+
+  function handleClose(): void {
+    signupDialogForm.reset({
+      name: '',
+      street: '',
+      number: '',
+      postalCode: '',
+      latitude: 0,
+      longitude: 0,
+      neighbourhood: '',
+      unprivilegedArea: false,
+      urgency: '',
+      quantityOfStudents: 0,
+      availability: '',
+      phone: '',
+      email: '',
+      password: '',
+    });
+  }
+
   const { mutate, isPending, error, isError } = useMutation({
     mutationFn: signupHttp,
     onSuccess: (data) => {
       if (data) {
-        router.push('/');
+        handleClose();
+        router.refresh();
 
         toast({
           title: 'Sucesso!',
@@ -75,24 +145,18 @@ export function SignupDialogComponent(): JSX.Element {
   });
 
   function handleSubmit(values: z.infer<typeof signupDialogSchema>): void {
-    mutate({ values });
-  }
+    let availability = signupDialogForm.getValues('availability');
 
-  function handleClose(): void {
-    signupDialogForm.reset({
-      name: '',
-      street: '',
-      number: '',
-      postalCode: '',
-      neighbourhood: '',
-      unprivilegedArea: false,
-      urgency: '',
-      quantityOfStudents: 0,
-      availability: '',
-      phone: '',
-      email: '',
-      password: '',
-    });
+    if (startTime && endTime) {
+      availability += ` ${startTime}-${endTime}`;
+    }
+
+    const updatedValues = {
+      ...values,
+      availability,
+    };
+
+    mutate({ values: updatedValues });
   }
 
   useEffect(() => {
@@ -165,9 +229,41 @@ export function SignupDialogComponent(): JSX.Element {
                 <FormItemComponent className="px-1">
                   <FormLabelComponent>CEP</FormLabelComponent>
                   <FormControlComponent>
-                    <InputComponent
-                      maxLength={8}
+                    <MaskedInputComponent
+                      mask="99999-999"
                       placeholder="Digite o CEP da escola"
+                      {...field}
+                    />
+                  </FormControlComponent>
+                  <FormMessageComponent />
+                </FormItemComponent>
+              )}
+            />
+            <FormFieldComponent
+              control={signupDialogForm.control}
+              name="latitude"
+              render={({ field }) => (
+                <FormItemComponent className="px-1">
+                  <FormLabelComponent>Latitude</FormLabelComponent>
+                  <FormControlComponent>
+                    <InputComponent
+                      placeholder="Digite a latitude de localização da escola"
+                      {...field}
+                    />
+                  </FormControlComponent>
+                  <FormMessageComponent />
+                </FormItemComponent>
+              )}
+            />
+            <FormFieldComponent
+              control={signupDialogForm.control}
+              name="longitude"
+              render={({ field }) => (
+                <FormItemComponent className="px-1">
+                  <FormLabelComponent>Longitude</FormLabelComponent>
+                  <FormControlComponent>
+                    <InputComponent
+                      placeholder="Digite a longitude de localização da escola"
                       {...field}
                     />
                   </FormControlComponent>
@@ -267,11 +363,38 @@ export function SignupDialogComponent(): JSX.Element {
                 <FormItemComponent className="px-1">
                   <FormLabelComponent>Disponibilidade</FormLabelComponent>
                   <FormControlComponent>
-                    <InputComponent
-                      placeholder="Digite a disponibilidade da escola"
-                      {...field}
-                    />
+                    <div className="flex flex-wrap gap-4">
+                      {daysOfWeek.map((day, index) => (
+                        <div key={index} className="flex items-center">
+                          <CheckboxComponent
+                            checked={field.value.split('-').includes(day)}
+                            onCheckedChange={(checked) =>
+                              handleDayChange(day, checked as boolean)
+                            }
+                          />
+                          <label htmlFor={day} className="ml-2">
+                            {day}
+                          </label>
+                        </div>
+                      ))}
+                    </div>
                   </FormControlComponent>
+                  <div className="mt-4 flex flex-wrap gap-3">
+                    <InputComponent
+                      className="w-1/4"
+                      type="time"
+                      placeholder="Informe a hora de início"
+                      value={startTime}
+                      onChange={handleStartTimeChange}
+                    />
+                    <InputComponent
+                      className="w-1/4"
+                      type="time"
+                      placeholder="Informe a hora de fim"
+                      value={endTime}
+                      onChange={handleEndTimeChange}
+                    />
+                  </div>
                   <FormMessageComponent />
                 </FormItemComponent>
               )}
@@ -281,9 +404,10 @@ export function SignupDialogComponent(): JSX.Element {
               name="phone"
               render={({ field }) => (
                 <FormItemComponent className="px-1">
-                  <FormLabelComponent>Contato</FormLabelComponent>
+                  <FormLabelComponent>Telefone</FormLabelComponent>
                   <FormControlComponent>
-                    <InputComponent
+                    <MaskedInputComponent
+                      mask="(99) 9999-9999"
                       placeholder="Digite o telefone para contato da escola"
                       {...field}
                     />
