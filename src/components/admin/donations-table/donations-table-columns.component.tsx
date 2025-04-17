@@ -4,6 +4,7 @@ import { ArrowsUpDownIcon } from '@heroicons/react/24/outline';
 import { ColumnDef } from '@tanstack/react-table';
 
 import { BadgesEnum, DonatedResourcesEnum } from '@/shared/models';
+import { formatDocument, formatPhone } from '@/shared/utils';
 
 import { ButtonComponent } from '@/components';
 
@@ -97,10 +98,20 @@ export const donationsTableColumns: ColumnDef<DonationsTableColumns>[] = [
   {
     accessorKey: 'donorDocument',
     header: 'Documento',
+    cell: ({ row }) => {
+      const document = row.original.donorDocument;
+
+      return <>{formatDocument(document)}</>;
+    },
   },
   {
     accessorKey: 'donorMobile',
-    header: 'Contato',
+    header: 'Celular',
+    cell: ({ row }) => {
+      const mobile = row.original.donorMobile;
+
+      return <>{formatPhone(mobile)}</>;
+    },
   },
   {
     accessorKey: 'donorBadges',

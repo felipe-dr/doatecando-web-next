@@ -14,6 +14,7 @@ import {
   SchoolModel,
   UrgencyEnum,
 } from '@/shared/models';
+import { formatPhone, formatPostalCode } from '@/shared/utils';
 
 import { SpinnerComponent } from '@/components/shared/spinner/spinner.component';
 import { TitleComponent } from '@/components/shared/title/title.component';
@@ -196,9 +197,9 @@ export function SchoolsComponent({
               </dt>
               <dd className="mb-4">{school.quantityOfStudents}</dd>
               <dt className="font-semibold uppercase text-base-white md:mb-5">
-                Contato
+                Telefone
               </dt>
-              <dd className="mb-4">{school.phone}</dd>
+              <dd className="mb-4">{formatPhone(school.phone)}</dd>
               <dt className="font-semibold uppercase text-base-white md:mb-5">
                 E-mail
               </dt>
@@ -214,7 +215,7 @@ export function SchoolsComponent({
               <dt className="font-semibold uppercase text-base-white md:mb-5">
                 CEP
               </dt>
-              <dd className="mb-4">{school.postalCode}</dd>
+              <dd className="mb-4">{formatPostalCode(school.postalCode)}</dd>
               <dt className="font-semibold uppercase text-base-white md:mb-5">
                 Latitude
               </dt>
