@@ -3,7 +3,7 @@ import { SchoolModel } from '../school/school.model';
 
 export enum DonatedResourcesEnum {
   CONECTORS = 'Conectores',
-  SACANNER = 'Digitalizador',
+  SCANNER = 'Digitalizador',
   CABINET = 'Gabinete',
   PRINTER = 'Impressora',
   MOBILES = 'Mobiles',
