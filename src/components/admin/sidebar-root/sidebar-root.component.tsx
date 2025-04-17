@@ -5,6 +5,7 @@ import {
   GlobeAltIcon,
   HeartIcon,
   HomeIcon,
+  UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -29,6 +30,11 @@ const ADMIN_SIDEBAR_ITEMS = [
     label: 'doações',
     path: '/admin/donations',
     icon: HeartIcon,
+  },
+  {
+    label: 'doadores',
+    path: '/admin/donors',
+    icon: UserGroupIcon,
   },
 ];
 
