@@ -10,7 +10,7 @@ export const signinDialogSchema = z.object({
       message: 'E-mail deve ter pelo menos 8 caracteres.',
     })
     .max(128, {
-      message: 'E-mail deve ter no máximo 255 caracteres.',
+      message: 'E-mail deve ter no máximo 128 caracteres.',
     })
     .email('E-mail deve ser válido.'),
   password: z
