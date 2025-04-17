@@ -1,4 +1,4 @@
-import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 import {
@@ -18,7 +18,16 @@ export default function AdminPage(): JSX.Element {
               href="/admin/donations"
             >
               <HeartIcon className="size-6 text-primary-2" />
-              Doação
+              Doações
+            </Link>
+          </li>
+          <li>
+            <Link
+              className="flex items-center gap-2 rounded-lg border border-base-14 bg-base-15 p-7 font-semibold text-base-white transition-colors hover:border-primary-3"
+              href="/admin/donors"
+            >
+              <UserGroupIcon className="size-6 text-primary-2" />
+              Doadores
             </Link>
           </li>
         </ul>
