@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { PHONE_PATTERN } from '@/shared/patterns';
+
 export const signupDialogSchema = z.object({
   name: z.string().min(1, {
     message: 'Nome é obrigatório.',
@@ -10,9 +12,16 @@ export const signupDialogSchema = z.object({
   number: z.string().min(1, {
     message: 'Número obrigatório.',
   }),
-  postalCode: z.string().min(8, {
-    message: 'CEP é obrigatório.',
-  }),
+  postalCode: z
+    .string()
+    .min(8, {
+      message: 'CEP é obrigatório.',
+    })
+    .regex(/^\d{5}-?\d{3}$/, {
+      message: 'CEP inválido.',
+    }),
+  latitude: z.coerce.number(),
+  longitude: z.coerce.number(),
   neighbourhood: z.string().min(1, {
     message: 'Bairro é obrigatório.',
   }),
@@ -26,7 +35,12 @@ export const signupDialogSchema = z.object({
   availability: z.string().min(1, {
     message: 'Disponibilidade é obrigatória.',
   }),
-  phone: z.string(),
+  phone: z
+    .string()
+    .optional()
+    .refine((val) => !val || PHONE_PATTERN.test(val), {
+      message: 'Telefone inválido. Use o formato (99) 9999-9999',
+    }),
   email: z
     .string()
     .min(1, {
@@ -36,7 +50,7 @@ export const signupDialogSchema = z.object({
       message: 'E-mail deve ter pelo menos 8 caracteres.',
     })
     .max(128, {
-      message: 'E-mail deve ter no máximo 255 caracteres.',
+      message: 'E-mail deve ter no máximo 128 caracteres.',
     })
     .email('E-mail deve ser válido.'),
   password: z
