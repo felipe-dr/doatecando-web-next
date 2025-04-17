@@ -1,0 +1,1 @@
+export const PHONE_PATTERN = /^\(\d{2}\) \d{4}-\d{4}$/;
