@@ -136,7 +136,9 @@ export async function RankingComponent(): Promise<JSX.Element | undefined> {
               </li>
             ))}
           </ul>
-          <RankingTableComponent ranking={ranking} />
+          {donorsRanking.length > 3 && (
+            <RankingTableComponent ranking={ranking} />
+          )}
         </div>
       </SectionBoxComponent>
     );
