@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React, { JSX } from 'react';
+import React from 'react';
 
 import { cn } from '@/shared/libs';
 

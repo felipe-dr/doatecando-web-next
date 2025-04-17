@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./docs/cover.png" alt="Dinamiques" />
+  <img src="./docs/cover.png" alt="Doatecando" />
   <hr>
   <h1 align="center">Doatecando: doação que educa, atitude que preserva</h1>
 </p>
@@ -129,7 +129,7 @@ O projeto foi desenvolvido seguindo diversas boas práticas e princípios arquit
 
 A estrutura de pastas é semântica e os arquivos estão devidamente categorizados de acordo com suas finalidades.
 
-![Estrutura de pastas do projeto Dinamiques](docs/doatecando-folder-structure.png)
+![Estrutura de pastas do projeto Doatecando](docs/doatecando-folder-structure.png)
 
 ## CI/CD
 

@@ -12,11 +12,12 @@ import {
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  PaginationState,
   SortingState,
   useReactTable,
   VisibilityState,
 } from '@tanstack/react-table';
-import { JSX, useState } from 'react';
+import { useState } from 'react';
 
 import {
   ButtonComponent,
@@ -36,17 +37,25 @@ import {
 interface DataTableComponentProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  filter: {
-    placeholdder: string;
+  pageSize?: number;
+  filter?: {
+    placeholder: string;
     term: string;
   };
+  showCustomColumns?: boolean;
 }
 
 export function DataTableComponent<TData, TValue>({
   columns,
   data,
+  pageSize = 10,
   filter,
+  showCustomColumns = true,
 }: DataTableComponentProps<TData, TValue>): JSX.Element {
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: pageSize,
+  });
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({
@@ -59,12 +68,14 @@ export function DataTableComponent<TData, TValue>({
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    onPaginationChange: setPagination,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     onColumnFiltersChange: setColumnFilters,
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     state: {
+      pagination,
       sorting,
       columnFilters,
       columnVisibility,
@@ -73,48 +84,57 @@ export function DataTableComponent<TData, TValue>({
 
   return (
     <>
-      <div className="mb-4 flex flex-wrap items-center gap-4">
-        <form className="relative w-full max-w-[27.5rem] md:self-start">
-          <InputComponent
-            type="search"
-            placeholder={`Buscar por ${filter.placeholdder}`}
-            value={
-              (table.getColumn(filter.term)?.getFilterValue() as string) ?? ''
-            }
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-              table.getColumn(filter.term)?.setFilterValue(event.target.value)
-            }
-          />
-          <MagnifyingGlassIcon className="absolute right-4 top-1/2 size-[1.042rem] -translate-y-1/2 text-primary-3 lg:right-5 lg:size-[1.34rem]" />
-        </form>
-        <DropdownMenuComponent>
-          <DropdownMenuTriggerComponent asChild>
-            <ButtonComponent className="text-md" variant="ghost">
-              <Cog8ToothIcon className="!size-[1.042rem] text-primary-4 lg:!size-[1.34rem]" />
-              Colunas
-            </ButtonComponent>
-          </DropdownMenuTriggerComponent>
-          <DropdownMenuContentComponent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItemComponent
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItemComponent>
-                );
-              })}
-          </DropdownMenuContentComponent>
-        </DropdownMenuComponent>
-      </div>
+      {(filter || showCustomColumns) && (
+        <div className="mb-4 flex flex-wrap items-center gap-4">
+          {filter && (
+            <form className="relative w-full max-w-[27.5rem] md:self-start">
+              <InputComponent
+                type="search"
+                placeholder={`Buscar por ${filter.placeholder}`}
+                value={
+                  (table.getColumn(filter.term)?.getFilterValue() as string) ??
+                  ''
+                }
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                  table
+                    .getColumn(filter.term)
+                    ?.setFilterValue(event.target.value)
+                }
+              />
+              <MagnifyingGlassIcon className="absolute right-4 top-1/2 size-[1.042rem] -translate-y-1/2 text-primary-3 lg:right-5 lg:size-[1.34rem]" />
+            </form>
+          )}
+          {showCustomColumns && (
+            <DropdownMenuComponent>
+              <DropdownMenuTriggerComponent asChild>
+                <ButtonComponent className="text-md" variant="ghost">
+                  <Cog8ToothIcon className="!size-[1.042rem] text-primary-4 lg:!size-[1.34rem]" />
+                  Colunas
+                </ButtonComponent>
+              </DropdownMenuTriggerComponent>
+              <DropdownMenuContentComponent align="end">
+                {table
+                  .getAllColumns()
+                  .filter((column) => column.getCanHide())
+                  .map((column) => {
+                    return (
+                      <DropdownMenuCheckboxItemComponent
+                        key={column.id}
+                        className="capitalize"
+                        checked={column.getIsVisible()}
+                        onCheckedChange={(value) =>
+                          column.toggleVisibility(!!value)
+                        }
+                      >
+                        {column.id}
+                      </DropdownMenuCheckboxItemComponent>
+                    );
+                  })}
+              </DropdownMenuContentComponent>
+            </DropdownMenuComponent>
+          )}
+        </div>
+      )}
       <TableComponent className="capitalize">
         <TableHeaderComponent>
           {table.getHeaderGroups().map((headerGroup) => (

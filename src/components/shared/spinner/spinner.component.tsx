@@ -1,7 +1,7 @@
 export function SpinnerComponent(): JSX.Element {
   return (
     <div
-      className="inline-block size-10 animate-spin rounded-full border-4 border-t-transparent text-primary-7"
+      className="inline-block size-10 animate-spin rounded-full border-4 border-t-transparent text-primary-3"
       role="status"
       aria-label="loading"
     >

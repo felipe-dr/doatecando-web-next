@@ -22,7 +22,7 @@ const buttonVariants = cva(
       },
       color: {
         gray: 'bg-base-13 text-base-white hover:bg-base-13/70',
-        primary: 'bg-primary-7 text-primary-8 hover:bg-primary-7/70',
+        primary: 'bg-primary-2 text-primary-8 hover:bg-primary-2/70',
       },
     },
     defaultVariants: {

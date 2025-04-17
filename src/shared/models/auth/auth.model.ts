@@ -1,4 +1,3 @@
 export interface AuthModel {
-  id: string;
-  accessToken: string;
+  access_token: string;
 }

@@ -1,7 +1,4 @@
-export function handleRandomSelection<T>(items: T[]): T[] {
-  return items.sort(() => Math.random() - 0.5);
-}
-
+// !! TEMP: maybe to delete
 export function handleSortByTerm<T>(
   array: T[],
   key: keyof T,

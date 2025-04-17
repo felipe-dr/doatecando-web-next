@@ -1,6 +1,6 @@
 services:
   web-dev:
-    container_name: dinamiques-web-next-dev
+    container_name: doatecando-web-next-dev
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -17,7 +17,7 @@ services:
     network_mode: bridge
 
   web-prod:
-    container_name: dinamiques-web-next
+    container_name: doatecando-web-next
     build:
       context: .
       dockerfile: Dockerfile.prod
