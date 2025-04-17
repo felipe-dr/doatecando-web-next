@@ -9,7 +9,7 @@ import {
 } from '@/components';
 
 export default async function DonationPage(): Promise<JSX.Element | undefined> {
-  const schools = await getSchoolsHttp();
+  const schools = await getSchoolsHttp({ limit: 1000 });
 
   return (
     <>
