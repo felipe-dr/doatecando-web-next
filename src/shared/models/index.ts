@@ -6,4 +6,3 @@ export * from './places/places.model';
 export * from './postal-code-informations/postal-code-informations.model';
 export * from './ranking/ranking.model';
 export * from './school/school.model';
-export * from './user/user.model';
