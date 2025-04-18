@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET!;
+const JWT_SECRET = process.env.JWT_SECRET!;
 
 export function verifyToken(token: string): JwtPayload | string {
   try {
