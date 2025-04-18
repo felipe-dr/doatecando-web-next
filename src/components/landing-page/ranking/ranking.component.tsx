@@ -68,7 +68,7 @@ export async function RankingComponent(): Promise<JSX.Element | undefined> {
           >
             {donorsRanking.slice(0, 3).map((donorRanking, index) => (
               <li
-                className={`relative flex w-full max-w-[21.25rem] flex-col items-center rounded-md border border-primary-1 bg-primary-4 text-center ${index === 0 && 'border-primary-3 bg-primary-8'} ${index === 1 && 'md:-order-1'} ${index === 2 && '!border-primary-7 !bg-primary-1'}`}
+                className={`relative flex w-full max-w-[21.25rem] flex-col items-center rounded-md border border-primary-1 bg-primary-4 text-center ${index === 0 && 'border-primary-3 bg-primary-8 lg:-mt-7'} ${index === 1 && 'md:-order-1'} ${index === 2 && '!border-primary-7 !bg-primary-1'}`}
                 key={donorRanking.id}
                 itemProp="itemListElement"
                 itemScope
