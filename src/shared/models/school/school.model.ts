@@ -7,13 +7,13 @@ export enum UrgencyEnum {
 }
 
 export interface SchoolModel {
-  id: string;
+  id: number;
   name: string;
   street: string;
   number: string;
   postalCode: string;
-  latitude?: string;
-  longitude?: string;
+  latitude?: number;
+  longitude?: number;
   neighbourhood: string;
   unprivilegedArea: boolean;
   urgency: UrgencyEnum;
