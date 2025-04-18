@@ -85,7 +85,7 @@ export function DonationFormComponent({
       if (response.success) {
         toast({
           title: 'Sucesso!',
-          description: response.message ?? 'Doação criada com sucesso.',
+          description: 'Doação criada com sucesso.',
           variant: 'success',
         });
 
@@ -93,14 +93,15 @@ export function DonationFormComponent({
       } else {
         toast({
           title: 'Erro!',
-          description: response.message ?? `Não foi possível criar a doação.`,
+          description: 'Não foi possível criar a doação.',
           variant: 'destructive',
         });
       }
     } catch (error: unknown) {
       toast({
         title: 'Erro!',
-        description: `Um erro inesperado ocorreu ao tentar criar a doação. Tente novamente mais tarde.`,
+        description:
+          'Um erro inesperado ocorreu ao tentar criar a doação. Tente novamente mais tarde.',
         variant: 'destructive',
       });
     }
