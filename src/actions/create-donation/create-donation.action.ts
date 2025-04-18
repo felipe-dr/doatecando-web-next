@@ -9,6 +9,7 @@ import { donationSchema } from '@/components/admin/donation-form/donation-schema
 
 export async function createDonationAction(formData: FormData) {
   const formDataObject = Object.fromEntries(formData.entries());
+  delete formDataObject.id;
   const donationSchemaValidation = donationSchema.safeParse(formDataObject);
   const donation = donationSchemaValidation.data!;
 
@@ -17,6 +18,8 @@ export async function createDonationAction(formData: FormData) {
 
     return { success: false, message: 'Erro na validação de dados', errors };
   }
+
+  delete donation.id;
 
   try {
     const accessToken = cookies().get('accessToken')?.value;
