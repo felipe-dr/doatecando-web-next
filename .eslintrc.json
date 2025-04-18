@@ -30,6 +30,7 @@
   ],
   "rules": {
     "prettier/prettier": 2,
+    "linebreak-style": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "error",
     "import-helpers/order-imports": [
