@@ -27,6 +27,10 @@ jobs:
           npm install --legacy-peer-deps
 
       - name: Build next.js
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DOATECANDO_API: ${{ secrets.DOATECANDO_API }}
+          NEXT_PUBLIC_CEP_API: ${{ secrets.NEXT_PUBLIC_CEP_API }}
         run: npm run build
 
       - name: Deploy to vercel
