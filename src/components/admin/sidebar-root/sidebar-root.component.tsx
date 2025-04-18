@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  AcademicCapIcon,
   ArrowLeftEndOnRectangleIcon,
   GlobeAltIcon,
   HeartIcon,
@@ -35,6 +36,11 @@ const ADMIN_SIDEBAR_ITEMS = [
     label: 'doadores',
     path: '/admin/donors',
     icon: UserGroupIcon,
+  },
+  {
+    label: 'escolas',
+    path: '/admin/schools',
+    icon: AcademicCapIcon,
   },
 ];
 
