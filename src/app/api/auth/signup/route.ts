@@ -3,7 +3,7 @@ import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const API_URL = process.env.NEXT_PUBLIC_DOATECANDO_API;
+  const API_URL = process.env.DOATECANDO_API;
   const {
     name,
     street,
@@ -52,6 +52,10 @@ export async function POST(request: Request) {
     }
 
     revalidatePath('/doacao');
+    revalidatePath('/admin/donors');
+    revalidatePath('/admin/donors/add');
+    revalidatePath('/admin/donations');
+    revalidatePath('/admin/donations/add');
 
     const data = await response.json();
     const nextResponse = NextResponse.json({

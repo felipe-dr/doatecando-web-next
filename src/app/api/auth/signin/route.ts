@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
-  const API_URL = process.env.NEXT_PUBLIC_DOATECANDO_API;
+  const API_URL = process.env.DOATECANDO_API;
   const { email, password } = await request.json();
 
   try {
