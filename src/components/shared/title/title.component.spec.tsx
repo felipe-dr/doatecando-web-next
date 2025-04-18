@@ -32,7 +32,7 @@ describe('TitleComponent unit tests', () => {
     );
     const title = screen.getByText('Test Title');
     expect(title).toHaveClass(
-      'relative ps-4 before:absolute before:left-0 before:h-full before:w-[0.25rem] before:bg-primary-7',
+      'relative ps-4 before:absolute before:left-0 before:h-full before:w-[0.25rem] before:bg-primary-3',
     );
   });
 
@@ -56,7 +56,7 @@ describe('TitleComponent unit tests', () => {
     );
     const dot = screen.getByText('.');
     expect(dot).toBeInTheDocument();
-    expect(dot).toHaveClass('animate-pulse text-primary-7');
+    expect(dot).toHaveClass('animate-pulse text-primary-3');
   });
 
   it('should not render the dot decorator when hasDotDecorator is false', () => {

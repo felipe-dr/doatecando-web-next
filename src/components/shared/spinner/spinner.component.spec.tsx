@@ -8,7 +8,7 @@ describe('SpinnerComponent unit tests', () => {
     const spinner = screen.getByRole('status', { name: /loading/i });
     expect(spinner).toBeInTheDocument();
     expect(spinner).toHaveClass(
-      'inline-block size-10 animate-spin rounded-full border-4 border-t-transparent text-primary-7',
+      'inline-block size-10 animate-spin rounded-full border-4 border-t-transparent text-primary-3',
     );
   });
 

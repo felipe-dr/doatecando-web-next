@@ -1,0 +1,42 @@
+name: CI - build and deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Run build and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: |
+          npm install --legacy-peer-deps
+
+      - name: Build next.js
+        env:
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DOATECANDO_API: ${{ secrets.DOATECANDO_API }}
+          NEXT_PUBLIC_CEP_API: ${{ secrets.NEXT_PUBLIC_CEP_API }}
+        run: npm run build
+
+      - name: Deploy to vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          JWT_SECRET: ${{ secrets.JWT_SECRET }}
+          DOATECANDO_API: ${{ secrets.DOATECANDO_API }}
+          NEXT_PUBLIC_CEP_API: ${{ secrets.NEXT_PUBLIC_CEP_API }}
+        run: npx vercel --prod --yes --token $VERCEL_TOKEN

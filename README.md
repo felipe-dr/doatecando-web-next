@@ -209,10 +209,13 @@ NEXT_PUBLIC_WEBSITE_URL=
 NEXT_PUBLIC_PORT=
 
 # Informe um termo para o secret do token da API
-NEXT_PUBLIC_JWT_SECRET=
+JWT_SECRET=
 
 # Informe a url da API
-NEXT_PUBLIC_DOATECANDO_API=https://tech-savior-latest.onrender.com/
+DOATECANDO_API=https://tech-savior-latest.onrender.com/
+
+# Informe a url da API de CEPs
+NEXT_PUBLIC_CEP_API=https://brasilapi.com.br/api/cep/v2
 ```
 
 A API e o banco de dados estando em execução, basta executar:
@@ -226,7 +229,7 @@ pnpm dev
 Atualizar a variável de ambiente no arquivo `.env`.
 
 ```bash
-NEXT_PUBLIC_DOATECANDO_API=http://host.docker.internal:3000
+DOATECANDO_API=http://host.docker.internal:3000
 ```
 
 ```bash
@@ -238,7 +241,7 @@ docker-compose up web-dev
 Atualizar a variável de ambiente no arquivo `.env`.
 
 ```bash
-NEXT_PUBLIC_DOATECANDO_API=http://host.docker.internal:3000
+DOATECANDO_API=http://host.docker.internal:3000
 ```
 
 ```bash

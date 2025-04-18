@@ -42,6 +42,7 @@ export const rankingTableColumns: ColumnDef<RankingTableColumns>[] = [
 
       return (
         <a
+          className="lowercase"
           href={`https://${website}`}
           target="_blank"
           rel="noopener noreferrer"

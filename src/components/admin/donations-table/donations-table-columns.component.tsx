@@ -75,10 +75,20 @@ export const donationsTableColumns: ColumnDef<DonationsTableColumns>[] = [
   {
     accessorKey: 'donorEmail',
     header: 'E-mail',
+    cell: ({ row }) => {
+      const email = row.original.donorEmail;
+
+      return <span className="lowercase">{email}</span>;
+    },
   },
   {
     accessorKey: 'donorWebsite',
     header: 'Website',
+    cell: ({ row }) => {
+      const website = row.original.donorWebsite;
+
+      return <span className="lowercase">{website}</span>;
+    },
   },
   {
     accessorKey: 'donorName',

@@ -1,5 +1,5 @@
 export interface PlaceModel {
-  id: string;
+  id: number;
   name: string;
   location: {
     latitude: number;

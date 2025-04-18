@@ -3,6 +3,7 @@ import { z } from 'zod';
 import { PHONE_PATTERN } from '@/shared/patterns';
 
 export const signupDialogSchema = z.object({
+  id: z.coerce.number().positive().optional(),
   name: z.string().min(1, {
     message: 'Nome é obrigatório.',
   }),
@@ -25,7 +26,28 @@ export const signupDialogSchema = z.object({
   neighbourhood: z.string().min(1, {
     message: 'Bairro é obrigatório.',
   }),
-  unprivilegedArea: z.boolean(),
+  unprivilegedArea: z
+    .union([z.boolean(), z.literal('true'), z.literal('false')])
+    .refine(
+      (value) => {
+        if (typeof value === 'string') {
+          return value === 'true' || value === 'false';
+        }
+
+        return true;
+      },
+      {
+        message:
+          'Área carente deve ser uma string "true" ou "false", ou um booleano.',
+      },
+    )
+    .transform((value) => {
+      if (typeof value === 'string') {
+        return value === 'true';
+      }
+
+      return value;
+    }),
   urgency: z.string().min(1, {
     message: 'Nível de urgência é obrigatório.',
   }),

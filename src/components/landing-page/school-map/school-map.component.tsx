@@ -5,7 +5,7 @@ const LazyMap = dynamic(() => import('@/components/shared/map/map.component'), {
 });
 
 interface SchoolMapReferences {
-  id: string;
+  id: number;
   location: { latitude: number; longitude: number };
   name: string;
 }

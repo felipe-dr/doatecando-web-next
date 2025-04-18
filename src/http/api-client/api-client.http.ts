@@ -1,1 +1,1 @@
-export const API_URL = process.env.NEXT_PUBLIC_DOATECANDO_API;
+export const API_URL = process.env.DOATECANDO_API;

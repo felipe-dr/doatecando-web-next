@@ -3,23 +3,23 @@
 import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
-import { createDonationHttp } from '@/http';
+import { createSchoolHttp } from '@/http';
 
-import { donationSchema } from '@/components/admin/donation-form/donation-schema';
+import { signupDialogSchema } from '@/components';
 
-export async function createDonationAction(formData: FormData) {
+export async function createSchoolAction(formData: FormData) {
   const formDataObject = Object.fromEntries(formData.entries());
   delete formDataObject.id;
-  const donationSchemaValidation = donationSchema.safeParse(formDataObject);
-  const donation = donationSchemaValidation.data!;
+  const schoolSchemaValidation = signupDialogSchema.safeParse(formDataObject);
+  const school = schoolSchemaValidation.data!;
 
-  if (!donationSchemaValidation.success) {
-    const errors = donationSchemaValidation.error.flatten().fieldErrors;
+  if (!schoolSchemaValidation.success) {
+    const errors = schoolSchemaValidation.error.flatten().fieldErrors;
 
     return { success: false, message: 'Erro na validação de dados', errors };
   }
 
-  delete donation.id;
+  delete school.id;
 
   try {
     const accessToken = cookies().get('accessToken')?.value;
@@ -30,17 +30,20 @@ export async function createDonationAction(formData: FormData) {
       };
     }
 
-    const response = await createDonationHttp({
+    const response = await createSchoolHttp({
       accessToken,
-      donation,
+      school,
     });
 
     if (response?.error) {
       return { success: false, message: response?.error };
     }
 
+    revalidatePath('/admin/donors');
+    revalidatePath('/admin/donors/add');
     revalidatePath('/admin/donations');
     revalidatePath('/admin/donations/add');
+    revalidatePath('/admin/schools');
     revalidatePath('/');
 
     return { success: true, message: 'sucesso' };

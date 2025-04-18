@@ -60,6 +60,11 @@ export const DonorsTableColumns: ColumnDef<DonorsTableColumns>[] = [
   {
     accessorKey: 'email',
     header: 'E-mail',
+    cell: ({ row }) => {
+      const email = row.original.email;
+
+      return <span className="lowercase">{email}</span>;
+    },
   },
   {
     accessorKey: 'mobile',
@@ -73,6 +78,11 @@ export const DonorsTableColumns: ColumnDef<DonorsTableColumns>[] = [
   {
     accessorKey: 'site',
     header: 'Website',
+    cell: ({ row }) => {
+      const website = row.original.site;
+
+      return <span className="lowercase">{website}</span>;
+    },
   },
   {
     id: 'edit',
