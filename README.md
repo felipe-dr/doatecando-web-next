@@ -90,10 +90,10 @@
   <a target="_blank" href="https://postcss.org/">
     <img src="https://img.shields.io/static/v1?style=plastic&color=blue&logoColor=red&label=PostCSS&message=TS&logo=PostCSS" alt="PostCSS" />
   <a target="_blank" href="https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=pt-br">
-    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=Google Lighthouse&message=Performance&" alt="GoogleLighthouse" />
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=GoogleLighthouse&message=Performance" alt="GoogleLighthouse" />
   </a>
   <a target="_blank" href="https://search.google.com/test/rich-results?hl=pt-BR">
-    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=GoogleRichResultsTest&message=SEO&" alt="GoogleRichResultsTest" />
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=GoogleRichResultsTest&message=SEO" alt="GoogleRichResultsTest" />
   </a>
 </p>
 
