@@ -3,7 +3,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
@@ -18,6 +18,7 @@ import {
   CheckboxComponent,
   FormComponent,
   FormControlComponent,
+  FormDescriptionComponent,
   FormFieldComponent,
   FormItemComponent,
   FormLabelComponent,
@@ -71,6 +72,24 @@ export function SchoolFormComponent({
   const [startTime, setStartTime] = useState<string>('00:00');
   const [endTime, setEndTime] = useState<string>('00:00');
 
+  useEffect(() => {
+    if (!school) return;
+
+    if (school.availability) {
+      const [daysPart, timePart] = school.availability.split(' ');
+
+      if (daysPart) {
+        schoolsForm.setValue('availability', daysPart);
+      }
+
+      if (timePart) {
+        const [start, end] = timePart.split('-');
+        setStartTime(start || '00:00');
+        setEndTime(end || '00:00');
+      }
+    }
+  }, [school, schoolsForm]);
+
   const handleDayChange = (day: string, isChecked: boolean) => {
     const currentAvailability = schoolsForm
       .getValues('availability')
@@ -117,9 +136,19 @@ export function SchoolFormComponent({
   ): Promise<void> => {
     const formData = new FormData();
     let availability = schoolsForm.getValues('availability');
+    const latitude = schoolsForm.getValues('latitude');
+    const longitude = schoolsForm.getValues('longitude');
 
     if (startTime && endTime) {
       availability += ` ${startTime}-${endTime}`;
+    }
+
+    if (latitude === undefined) {
+      schoolSchemaData.latitude = 0;
+    }
+
+    if (longitude === undefined) {
+      schoolSchemaData.longitude = 0;
     }
 
     formData.delete('availability');
@@ -240,10 +269,23 @@ export function SchoolFormComponent({
                 <FormLabelComponent>Latitude</FormLabelComponent>
                 <FormControlComponent>
                   <InputComponent
-                    placeholder="Digite a latitude de localização da escola"
+                    placeholder="Digite a latitude de localização da escola: -23.5313425"
                     {...field}
                   />
                 </FormControlComponent>
+                <FormDescriptionComponent>
+                  <span className="font-semibold text-primary-2">DICA:</span>{' '}
+                  informe o CEP na url conforme exemplo para obter a latitude:{' '}
+                  <a
+                    className="font-semibold text-primary-3"
+                    href="https://brasilapi.com.br/api/cep/v2/01153000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    https://brasilapi.com.br/api/cep/v2/
+                    <span className="text-primary-1">01153000</span>
+                  </a>
+                </FormDescriptionComponent>
                 <FormMessageComponent />
               </FormItemComponent>
             )}
@@ -256,10 +298,23 @@ export function SchoolFormComponent({
                 <FormLabelComponent>Longitude</FormLabelComponent>
                 <FormControlComponent>
                   <InputComponent
-                    placeholder="Digite a longitude de localização da escola"
+                    placeholder="Digite a longitude de localização da escola: -23.5313425"
                     {...field}
                   />
                 </FormControlComponent>
+                <FormDescriptionComponent>
+                  <span className="font-semibold text-primary-2">DICA:</span>{' '}
+                  informe o CEP na url conforme exemplo para obter a longitude:{' '}
+                  <a
+                    className="font-semibold text-primary-3"
+                    href="https://brasilapi.com.br/api/cep/v2/01153000"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    https://brasilapi.com.br/api/cep/v2/
+                    <span className="text-primary-1">01153000</span>
+                  </a>
+                </FormDescriptionComponent>
                 <FormMessageComponent />
               </FormItemComponent>
             )}
@@ -422,23 +477,25 @@ export function SchoolFormComponent({
               </FormItemComponent>
             )}
           />
-          <FormFieldComponent
-            control={schoolsForm.control}
-            name="password"
-            render={({ field }) => (
-              <FormItemComponent className="px-1">
-                <FormLabelComponent>Senha</FormLabelComponent>
-                <FormControlComponent>
-                  <InputComponent
-                    type="password"
-                    placeholder="Digite a sua senha"
-                    {...field}
-                  />
-                </FormControlComponent>
-                <FormMessageComponent />
-              </FormItemComponent>
-            )}
-          />
+          {!school && (
+            <FormFieldComponent
+              control={schoolsForm.control}
+              name="password"
+              render={({ field }) => (
+                <FormItemComponent className="px-1">
+                  <FormLabelComponent>Senha</FormLabelComponent>
+                  <FormControlComponent>
+                    <InputComponent
+                      type="password"
+                      placeholder="Digite a sua senha"
+                      {...field}
+                    />
+                  </FormControlComponent>
+                  <FormMessageComponent />
+                </FormItemComponent>
+              )}
+            />
+          )}
         </div>
         <ButtonComponent
           className="w-full sm:w-max sm:justify-self-end"
