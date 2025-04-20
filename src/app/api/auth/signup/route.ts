@@ -52,6 +52,7 @@ export async function POST(request: Request) {
     }
 
     revalidatePath('/doacao');
+    revalidatePath('/admin/schools');
     revalidatePath('/admin/donors');
     revalidatePath('/admin/donors/add');
     revalidatePath('/admin/donations');
