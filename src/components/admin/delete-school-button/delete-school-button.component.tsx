@@ -21,11 +21,10 @@ export function DeleteSchoolButtonComponent({
 
     const formData = new FormData();
     formData.append('id', String(id));
-    console.log(formData);
 
     try {
       const response = await deleteSchoolAction(formData);
-      console.log(response);
+
       if (response.success) {
         toast({
           title: 'Sucesso!',

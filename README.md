@@ -89,12 +89,11 @@
   </a>
   <a target="_blank" href="https://postcss.org/">
     <img src="https://img.shields.io/static/v1?style=plastic&color=blue&logoColor=red&label=PostCSS&message=TS&logo=PostCSS" alt="PostCSS" />
-  </a>
   <a target="_blank" href="https://chromewebstore.google.com/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk?hl=pt-br">
-    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=Google Lighthouse&message= &logo=Lighthouse" alt="GoogleLighthouse" />
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=Google Lighthouse&message=Performance&" alt="GoogleLighthouse" />
   </a>
   <a target="_blank" href="https://search.google.com/test/rich-results?hl=pt-BR">
-    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=GoogleRichResultsTest&message= &logo=GoogleSearchConsole" alt="GoogleRichResultsTest" />
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=GoogleRichResultsTest&message=SEO&" alt="GoogleRichResultsTest" />
   </a>
 </p>
 
@@ -112,7 +111,7 @@
 
 ## Sobre
 
-Landing page desenvolvida em NextJS que incentiva a doação de equipamentos eletrônicos em desuso às escolas da rede pública de ensino.
+Landing page desenvolvida em NextJS que incentiva a doação de equipamentos eletrônicos em desuso e a prestação de serviços às escolas da rede pública de ensino.
 
 ## Funcionalidades
 
@@ -120,12 +119,73 @@ Landing page desenvolvida em NextJS que incentiva a doação de equipamentos ele
 >
 > - Os itens abaixo sem a marcação de checado são recursos que estão mapeados para serem implementados posteriormente.
 
+- [x] Usuário autenticado poderá gerenciar:
+
+  - [x] Doações
+    - [x] Criar
+    - [x] Consultar todos
+      - [x] Com paginação
+      - [x] Ordenar por id, item, nome do doador e escola
+    - [x] Consultar por nome do doador
+    - [x] Personalizar exibição de colunas na tabela
+  - [x] Doadores
+    - [x] Criar
+    - [x] Consultar todos
+      - [x] Com paginação
+      - [x] Ordenar por id e nome
+    - [x] Consultar por nome do doador
+    - [x] Personalizar exibição de colunas na tabela
+    - [x] Editar
+  - [x] Escolas
+    - [x] Criar
+      - [ ] Exibir calendário para a escolha da disponibilidade
+    - [x] Consultar todas
+      - [x] Com paginação
+      - [x] Ordenar por id, nome, cep, área carente e nível de urgência
+    - [x] Consultar por nome da escola
+    - [x] Personalizar exibição de colunas na tabela
+    - [x] Editar
+    - [x] Deletar
+  - [ ] Badges
+    - [ ] Gerenciar conquistas
+  - [ ] Doador
+    - [ ] Converter pontos / badges acumulados no resgate a prêmios
+  - [ ] Diferentes níveis de perfis
+
+- [x] Conquistas
+
+  - [x] Quando uma doação é criada, uma _badge_ é adicionada ao doador de acordo com pré-definições de quantidade e tipo de doação
+
+- [x] Usuário visitante não estritamente autenticado poderá acessar:
+
+  - [x] Página inicial
+    - [x] Visualiza informações sobre a organização
+    - [x] Ranking de doadores e com filtro por página
+    - [x] Estatísticas das doações
+    - [x] Informativos sobre como apoiar a organização
+    - [x] Incentivo a reciclagem
+  - [x] Página doação
+    - [x] Buscar escolas por nome, rua ou CEP
+    - [x] Escolas disponíveis para receberem doações
+      - [x] Nível de urgência destacada e ordenada ao topo
+      - [x] Visualização da localização da escola em mapa em tempo real
+    - [ ] Informar o CEP e retornar lista de escolas mais próximas, tanto em tabela, quanto em marcadores no mapa
+  - [ ] Formulário de doação on-line
+    - [ ] O visitante poderá se cadastrar e agendar uma doação com determinada escola
+  - [ ] Área para a doação em dinheiro
+  - [ ] Área para a divulgação e captação de fundos _("vaquinha online")_
+
 ## Arquitetura
 
 O projeto foi desenvolvido seguindo diversas boas práticas e princípios arquiteturais para que se mantenha robusto e escalável para novas implementações.
 
 - Clean code
 - DRY ( Dont Repeat Yourself )
+- Composition Pattern
+- Container e Presentational Components
+- Custom hooks
+- Layout Composition
+- Service Layer
 
 A estrutura de pastas é semântica e os arquivos estão devidamente categorizados de acordo com suas finalidades.
 
@@ -137,9 +197,9 @@ Embora esteja sendo utilizado o `husky` com o `lintstaged` para já validar o ar
 
 - **Integração contínua**
   - Validação de testes **unitários** a cada `push` e em qualquer `branch`
-  - Validação de testes de **integração** e de **e2e** em cada `pull request` **( Em breve )**
-- **Entrega contínua ( Em breve )**
-  - Após ser efetuado um `push` na `branch main` e já ter sido executado todo o fluxo de integração contínua, será feito o `build` prévio da aplicação e disponibilizada a imagem no `dockerhub`.
+  - Validação de testes de **integração** e de **e2e** em cada `pull request`
+- **Entrega contínua**
+  - Após ser efetuado um `push` na `branch main` e já ter sido executado todo o fluxo de integração contínua, será feito o `build` prévio da aplicação e disponibilizada na **Vercel**, no [link](https://doatecando-web-next.vercel.app/).
 
 > **DICA !**
 >
@@ -202,10 +262,10 @@ pnpm install
 Configure previamente as variáveis de ambiente criando um arquivo `.env` na raiz do projeto. É possível obter o nome das variáveis a serem definidas, no arquivo `.env.example` contida na pasta raiz do projeto.
 
 ```bash
-# Futuramente quando o projeto estiver hospedado em uma plataforma, poderá ser informado o domínio abaixo
+# O preenchimento é opcional, mas futuramente quando o projeto estiver hospedado em uma plataforma, poderá ser informado o domínio abaixo
 NEXT_PUBLIC_WEBSITE_URL=
 
-# Atualmente no package.json está definido fixadamente a porta 4000 devido a incompatibilidades. Futuramente essa variável será utilizada
+# O preenchimento é opcional e atualmente no package.json está definido fixadamente a porta 4000 para evitar incompatibilidades. Mas futuramente essa variável poderá ser utilizada
 NEXT_PUBLIC_PORT=
 
 # Informe um termo para o secret do token da API

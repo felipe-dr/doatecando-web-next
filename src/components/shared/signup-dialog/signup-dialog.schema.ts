@@ -21,8 +21,12 @@ export const signupDialogSchema = z.object({
     .regex(/^\d{5}-?\d{3}$/, {
       message: 'CEP inválido.',
     }),
-  latitude: z.coerce.number(),
-  longitude: z.coerce.number(),
+  latitude: z.coerce.number({
+    invalid_type_error: 'Latitude deve ser um número.',
+  }),
+  longitude: z.coerce.number({
+    invalid_type_error: 'Longitude deve ser um número.',
+  }),
   neighbourhood: z.string().min(1, {
     message: 'Bairro é obrigatório.',
   }),
