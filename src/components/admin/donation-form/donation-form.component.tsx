@@ -168,7 +168,7 @@ export function DonationFormComponent({
               <FormLabelComponent>Nome</FormLabelComponent>
               <FormControlComponent>
                 <InputComponent
-                  placeholder="Digite o nome do equipamento"
+                  placeholder="Digite o nome do equipamento ou serviço"
                   maxLength={50}
                   {...field}
                 />
