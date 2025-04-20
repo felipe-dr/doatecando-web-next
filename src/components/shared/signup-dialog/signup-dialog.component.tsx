@@ -243,7 +243,7 @@ export function SignupDialogComponent(): JSX.Element {
               control={signupDialogForm.control}
               name="latitude"
               render={({ field }) => (
-                <FormItemComponent className="px-1">
+                <FormItemComponent className="px-1" hidden>
                   <FormLabelComponent>Latitude</FormLabelComponent>
                   <FormControlComponent>
                     <InputComponent
@@ -259,7 +259,7 @@ export function SignupDialogComponent(): JSX.Element {
               control={signupDialogForm.control}
               name="longitude"
               render={({ field }) => (
-                <FormItemComponent className="px-1">
+                <FormItemComponent className="px-1" hidden>
                   <FormLabelComponent>Longitude</FormLabelComponent>
                   <FormControlComponent>
                     <InputComponent
