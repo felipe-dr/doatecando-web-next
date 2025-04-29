@@ -62,7 +62,6 @@
     "react-hook-form": "7.53.2",
     "react-input-mask": "^2.0.4",
     "react-leaflet": "4.2.1",
-    "rehype-sanitize": "^6.0.0",
     "tailwind-merge": "2.5.4",
     "tailwindcss-animate": "1.0.7",
     "zod": "^3.23.8"

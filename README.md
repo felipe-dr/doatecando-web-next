@@ -42,6 +42,15 @@
   <a target="_blank" href="https://www.typescriptlang.org/">
     <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=Typescript&message=TS&logo=typescript" alt="Typescript.org" />
   </a>
+  <a target="_blank" href="https://www.npmjs.com/package/escape-html">
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=EscapeHtml&message=TS" alt="EscapeHtml" />
+  </a>
+  <a target="_blank" href="https://leafletjs.com/">
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=Leaflet&message=TS" alt="Leaflet" />
+  </a>
+  <a target="_blank" href="https://react-leaflet.js.org/">
+    <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=ReactLeaflet&message=TS" alt="ReactLeaflet" />
+  </a>
   <a target="_blank" href="https://react-hook-form.com/">
     <img src="https://img.shields.io/static/v1?style=plastic&color=blue&label=ReactHookForm&message=TS&logo=ReactHookForm" alt="ReactHookForm" />
   </a>
@@ -331,6 +340,9 @@ docker-compose down
 - [Vitest](https://vitest.dev/)
 - [TestingLibrary](https://testing-library.com/)
 - [Tailwind](https://tailwindcss.com/)
+- [EscapeHtml](https://www.npmjs.com/package/escape-html)
+- [Leaflet](https://leafletjs.com/)
+- [ReactLeaflet](https://react-leaflet.js.org/)
 - [ClassVarianceAuthority](https://cva.style/docs)
 - [CLSX](https://www.npmjs.com/package/clsx)
 - [RadixUI](https://www.radix-ui.com/)
