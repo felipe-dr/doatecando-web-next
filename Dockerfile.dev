@@ -24,6 +24,8 @@ COPY --from=builder /usr/src/app/next.config.mjs ./next.config.mjs
 COPY --from=builder /usr/src/app/src ./src
 COPY --from=builder /usr/src/app .
 
+RUN mkdir -p /usr/src/app/.next && chown -R appuser:appgroup /usr/src/app/.next
+
 EXPOSE 4000
 
 USER appuser
